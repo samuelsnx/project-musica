@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player de Música</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .player {
+            margin: 20px;
+        }
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Player de Música</h1>
+    <div class="player">
+        <audio id="audio" controls>
+            <source id="audioSource" src="musica1.mp3" type="audio/mp3">
+            Seu navegador não suporta o elemento de áudio.
+        </audio>
+        <br>
+        <button onclick="playAudio()">Reproduzir</button>
+        <button onclick="pauseAudio()">Pausar</button>
+        <button onclick="trocarMusica()">Trocar Música</button>
+    </div>
+    <script>
+        const audio = document.getElementById('audio');
+        const audioSource = document.getElementById('audioSource');
+        let isPlaying = false;
+
+        function playAudio() {
+            audio.play();
+            isPlaying = true;
+        }
+
+        function pauseAudio() {
+            audio.pause();
+            isPlaying = false;
+        }
+
+        function trocarMusica() {
+            const musicas = ['ncs.mp3', 'ncs2.mp3']; // Adicione mais músicas aqui
+            let currentSrc = audioSource.getAttribute('src');
+            let nextMusic = musicas[(musicas.indexOf(currentSrc) + 1) % musicas.length];
+            audioSource.setAttribute('src', nextMusic);
+            audio.load();
+            if (isPlaying) {
+                audio.play();
+            }
+        }
+    </script>
+</body>
+</html>
